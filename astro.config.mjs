@@ -2,6 +2,8 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
+  site: 'https://karthikkorrayi.github.io',
+  base: '/arth-studio',
   integrations: [
     tailwind({
       // We keep our own base styles in src/styles/global.css,
