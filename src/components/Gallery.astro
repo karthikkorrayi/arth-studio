@@ -1,0 +1,97 @@
+---
+// In production, swap these `img` tags for Astro's built-in Image component
+// once real photography is imported as local assets, e.g.:
+//
+//   import { Image } from 'astro:assets';
+//   import livingRoom from '../assets/gallery/living-room.jpg';
+//   <Image src={livingRoom} alt="…" widths={[400, 800, 1200]} format="webp" />
+//
+// astro:assets only optimizes images that are imported at build time, so it
+// can't operate on the remote placeholder URLs used below — hence plain <img>
+// here, with the real pattern left in this comment.
+
+const items = [
+  {
+    sheet: 'A-01',
+    title: 'Kaveri House',
+    tag: 'Residential — Bengaluru',
+    img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1200&auto=format&fit=crop',
+    span: 'lg:col-span-2 lg:row-span-2',
+  },
+  {
+    sheet: 'A-02',
+    title: 'Linden & Co. Studio',
+    tag: 'Commercial — Workspace',
+    img: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1200&auto=format&fit=crop',
+    span: '',
+  },
+  {
+    sheet: 'A-03',
+    title: 'Malabar Loft',
+    tag: 'Renovation',
+    img: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1200&auto=format&fit=crop',
+    span: '',
+  },
+  {
+    sheet: 'A-04',
+    title: 'Cassia Residence',
+    tag: 'Residential — Interior',
+    img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop',
+    span: 'lg:col-span-2',
+  },
+  {
+    sheet: 'A-05',
+    title: 'North Light Pavilion',
+    tag: 'Architecture — New Build',
+    img: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?q=80&w=1200&auto=format&fit=crop',
+    span: '',
+  },
+  {
+    sheet: 'A-06',
+    title: 'Ferrous Kitchen',
+    tag: 'Residential — Kitchen',
+    img: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1200&auto=format&fit=crop',
+    span: '',
+  },
+];
+---
+
+<section id="gallery" class="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+  <div class="mb-14 flex flex-col justify-between gap-6 border-b border-line pb-8 sm:flex-row sm:items-end">
+    <div>
+      <p class="mb-3 font-mono text-xs uppercase tracking-widest2 text-taupe">Selected Work</p>
+      <h2 class="font-display text-3xl font-light text-ink sm:text-4xl">Gallery of References</h2>
+    </div>
+    <p class="max-w-sm text-sm leading-relaxed text-ink-soft">
+      Six projects, drawn from residential, commercial, and renovation work — sheet numbers
+      reference our internal drawing set, not a ranking.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:auto-rows-[280px]">
+    {items.map((item) => (
+      <article class={`group relative overflow-hidden bg-ink ${item.span}`}>
+        <img
+          src={item.img}
+          alt={`${item.title} — ${item.tag}`}
+          loading="lazy"
+          class="h-full min-h-[280px] w-full object-cover transition-transform duration-[600ms] ease-studio group-hover:scale-105"
+        />
+
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/10 to-transparent opacity-60 transition-opacity duration-300 ease-studio group-hover:opacity-90"
+          aria-hidden="true"
+        ></div>
+
+        <span class="absolute left-4 top-4 font-mono text-[11px] uppercase tracking-widest2 text-plaster/70">
+          {item.sheet}
+        </span>
+
+        <div class="absolute inset-x-0 bottom-0 translate-y-2 p-5 opacity-90 transition-transform duration-300 ease-studio group-hover:translate-y-0">
+          <p class="font-mono text-[11px] uppercase tracking-widest2 text-plaster/60">{item.tag}</p>
+          <h3 class="mt-1 font-display text-xl text-plaster">{item.title}</h3>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,147 @@
+---
+const projectTypes = ['Residential', 'Commercial', 'Renovation', 'Consultation'];
+---
+
+<section id="contact" class="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+  <div class="grid grid-cols-1 gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:gap-24">
+    <div>
+      <img src="/public/logo/logo.jpg" alt="Plinth Studio" class="mb-8 h-10 w-auto" />
+      <p class="mb-3 font-mono text-xs uppercase tracking-widest2 text-taupe">Start a Project</p>
+      <h2 class="max-w-sm font-display text-3xl font-light leading-tight text-ink sm:text-4xl">
+        Tell us what you're building, or rebuilding.
+      </h2>
+      <p class="mt-6 max-w-sm text-sm leading-relaxed text-ink-soft">
+        We take on a small number of projects each quarter. Share a few details and we'll
+        reply within three working days with next steps or a referral.
+      </p>
+
+      <div class="mt-12 space-y-6 border-t border-line pt-8 font-mono text-xs uppercase tracking-widest2 text-ink-soft">
+        <p>studio@arth.design</p>
+        <p>+91 63 0264 8312</p>
+        <p>Indiranagar, Bengaluru</p>
+      </div>
+    </div>
+
+    <form
+      id="contact-form"
+      action="https://api.sheetmonkey.io/tb/as/PLACEHOLDER"
+      method="POST"
+      class="space-y-6"
+    >
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div class="flex flex-col gap-2">
+          <label for="name" class="font-mono text-xs uppercase tracking-widest2 text-ink-soft">
+            Full Name
+          </label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            autocomplete="name"
+            class="border border-line bg-transparent px-4 py-3 text-sm text-ink outline-none transition-colors duration-300 ease-studio placeholder:text-ink-soft/50 focus:border-ink"
+            placeholder="Ananya Rao"
+          />
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="email" class="font-mono text-xs uppercase tracking-widest2 text-ink-soft">
+            Email Address
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            autocomplete="email"
+            class="border border-line bg-transparent px-4 py-3 text-sm text-ink outline-none transition-colors duration-300 ease-studio placeholder:text-ink-soft/50 focus:border-ink"
+            placeholder="you@example.com"
+          />
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="project-type" class="font-mono text-xs uppercase tracking-widest2 text-ink-soft">
+          Project Type
+        </label>
+        <div class="relative">
+          <select
+            id="project-type"
+            name="project_type"
+            required
+            class="w-full appearance-none border border-line bg-transparent px-4 py-3 text-sm text-ink outline-none transition-colors duration-300 ease-studio focus:border-ink"
+          >
+            <option value="" disabled selected>Select one</option>
+            {projectTypes.map((type) => (
+              <option value={type}>{type}</option>
+            ))}
+          </select>
+          <span class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-mono text-xs text-ink-soft" aria-hidden="true">
+            ▾
+          </span>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="message" class="font-mono text-xs uppercase tracking-widest2 text-ink-soft">
+          Project Details
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          rows="5"
+          class="resize-none border border-line bg-transparent px-4 py-3 text-sm text-ink outline-none transition-colors duration-300 ease-studio placeholder:text-ink-soft/50 focus:border-ink"
+          placeholder="Site size, timeline, budget range, and anything else worth knowing up front."
+        ></textarea>
+      </div>
+
+      <div class="flex items-center gap-6 pt-2">
+        <button
+          type="submit"
+          class="border border-ink bg-ink px-7 py-3.5 font-mono text-xs uppercase tracking-widest2 text-plaster transition-colors duration-300 ease-studio hover:bg-transparent hover:text-ink disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          Send Enquiry
+        </button>
+        <p id="form-status" class="font-mono text-xs uppercase tracking-widest2 text-ink-soft" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  // Progressive enhancement: intercept submit so a Formspree/SheetMonkey-style
+  // JSON endpoint doesn't hard-navigate the visitor away from the page.
+  // If the fetch fails (e.g. the placeholder endpoint is still unconfigured),
+  // the form falls back to its native action/method.
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('form-status');
+  const submitBtn = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!form || !status || !submitBtn) return;
+
+    submitBtn.disabled = true;
+    status.textContent = 'Sending…';
+
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+
+      if (response.ok) {
+        status.textContent = 'Sent — thank you.';
+        form.reset();
+      } else {
+        status.textContent = 'Something went wrong. Email us directly instead.';
+      }
+    } catch {
+      status.textContent = 'Something went wrong. Email us directly instead.';
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+</script>

@@ -1,0 +1,57 @@
+/* Fonts: Fraunces (display), Inter (body), IBM Plex Mono (blueprint labels) */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: theme('colors.plaster.DEFAULT');
+  }
+
+  body {
+    @apply font-body text-ink antialiased;
+    font-feature-settings: 'ss01' 1;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+
+  /* Visible, deliberate keyboard focus — never remove outlines without replacing them */
+  :focus-visible {
+    outline: 2px solid theme('colors.rust');
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background-color: theme('colors.rust');
+    color: theme('colors.plaster.DEFAULT');
+  }
+}
+
+@layer utilities {
+  .blueprint-tick {
+    background-image: repeating-linear-gradient(
+      to right,
+      theme('colors.line') 0,
+      theme('colors.line') 1px,
+      transparent 1px,
+      transparent 64px
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

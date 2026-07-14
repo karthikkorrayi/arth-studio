@@ -1,0 +1,115 @@
+---
+const links = [
+  { label: 'Gallery', href: '#gallery' },
+  { label: 'About', href: '#about' },
+];
+---
+
+<header class="fixed inset-x-0 top-0 z-50 border-b border-line/70 bg-plaster/90 backdrop-blur-sm">
+  <nav class="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-10" aria-label="Primary">
+    <a href="#top" class="flex items-center gap-3 font-display text-lg tracking-tight text-ink">
+      <span class="relative block h-6 w-6 shrink-0" aria-hidden="true">
+        <span class="absolute inset-0 border border-ink"></span>
+        <span class="absolute inset-[5px] bg-ink"></span>
+      </span>
+      <span>ARTH<span class="text-taupe"> STUDIO</span></span>
+    </a>
+
+    <!-- Desktop links -->
+    <ul class="hidden items-center gap-10 md:flex">
+      {links.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="font-mono text-xs uppercase tracking-widest2 text-ink-soft transition-colors duration-300 ease-studio hover:text-ink"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a
+          href="#contact"
+          class="border border-ink px-5 py-2.5 font-mono text-xs uppercase tracking-widest2 text-ink transition-colors duration-300 ease-studio hover:bg-ink hover:text-plaster"
+        >
+          Contact
+        </a>
+      </li>
+    </ul>
+
+    <!-- Mobile menu trigger -->
+    <button
+      id="menu-trigger"
+      type="button"
+      class="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Open menu"
+    >
+      <span class="block h-px w-6 bg-ink transition-transform duration-300 ease-studio" id="bar-1"></span>
+      <span class="block h-px w-6 bg-ink transition-opacity duration-300 ease-studio" id="bar-2"></span>
+      <span class="block h-px w-6 bg-ink transition-transform duration-300 ease-studio" id="bar-3"></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu panel -->
+  <div
+    id="mobile-menu"
+    class="pointer-events-none fixed inset-0 top-20 flex -translate-y-2 flex-col justify-between border-t border-line bg-plaster px-6 py-10 opacity-0 transition-all duration-300 ease-studio md:hidden"
+  >
+    <ul class="flex flex-col gap-8">
+      {links.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            data-menu-link
+            class="font-display text-4xl text-ink"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <a
+      href="#contact"
+      data-menu-link
+      class="w-full border border-ink px-6 py-4 text-center font-mono text-xs uppercase tracking-widest2 text-ink"
+    >
+      Contact
+    </a>
+  </div>
+</header>
+
+<script>
+  const trigger = document.getElementById('menu-trigger');
+  const menu = document.getElementById('mobile-menu');
+  const bar1 = document.getElementById('bar-1');
+  const bar2 = document.getElementById('bar-2');
+  const bar3 = document.getElementById('bar-3');
+  const links = document.querySelectorAll('[data-menu-link]');
+
+  function setOpen(open: boolean) {
+    if (!trigger || !menu) return;
+    trigger.setAttribute('aria-expanded', String(open));
+    trigger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+
+    menu.classList.toggle('opacity-0', !open);
+    menu.classList.toggle('pointer-events-none', !open);
+    menu.classList.toggle('-translate-y-2', !open);
+
+    bar1?.classList.toggle('rotate-45', open);
+    bar1?.classList.toggle('translate-y-[7px]', open);
+    bar3?.classList.toggle('-rotate-45', open);
+    bar3?.classList.toggle('-translate-y-[7px]', open);
+    bar2?.classList.toggle('opacity-0', open);
+
+    document.body.classList.toggle('overflow-hidden', open);
+  }
+
+  trigger?.addEventListener('click', () => {
+    const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+    setOpen(!isOpen);
+  });
+
+  links.forEach((link) => link.addEventListener('click', () => setOpen(false)));
+</script>

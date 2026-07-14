@@ -1,0 +1,55 @@
+---
+const principles = [
+  {
+    label: 'Material Honesty',
+    copy: 'We specify what a surface actually is — plaster, stone, timber — rather than a finish pretending to be one.',
+  },
+  {
+    label: 'Built for Use',
+    copy: 'Every plan is pressure-tested against a real week: laundry day, a dinner for twelve, a Tuesday alone.',
+  },
+  {
+    label: 'Quiet Light',
+    copy: 'Daylight is drawn before furniture is. Artificial light is layered, never a single ceiling fixture.',
+  },
+];
+---
+
+<section id="about" class="border-y border-line bg-plaster-dim">
+  <div class="mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 py-24 lg:grid-cols-2 lg:gap-20 lg:px-10 lg:py-32">
+    <div class="relative order-2 lg:order-1">
+      <img
+        src="https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=1200&auto=format&fit=crop"
+        alt="Principal designer reviewing floor plans on a studio worktable"
+        loading="lazy"
+        class="h-[420px] w-full object-cover sm:h-[520px]"
+      />
+      <div class="absolute -bottom-6 -right-6 hidden max-w-[220px] border border-ink bg-plaster p-4 sm:block">
+        <p class="font-mono text-[11px] uppercase tracking-widest2 text-taupe">Founded</p>
+        <p class="mt-1 font-display text-2xl text-ink">2024, Bengaluru</p>
+      </div>
+    </div>
+
+    <div class="order-1 flex flex-col justify-center lg:order-2">
+      <p class="mb-3 font-mono text-xs uppercase tracking-widest2 text-taupe">About the Studio</p>
+      <h2 class="max-w-md font-display text-3xl font-light leading-tight text-ink sm:text-4xl">
+        Design that answers to the building, not to the trend cycle.
+      </h2>
+      <p class="mt-6 max-w-lg text-base leading-relaxed text-ink-soft">
+        ARTH STUDIO was founded on a simple complaint: too many interiors photograph well
+        and live badly. We work across residential, commercial, and renovation projects,
+        holding architecture and interiors in the same hand so a house isn't
+        beautifully lit in the render and dim in the hallway.
+      </p>
+
+      <dl class="mt-10 flex flex-col gap-6 border-t border-line pt-8">
+        {principles.map((p) => (
+          <div class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-1">
+            <dt class="font-mono text-xs uppercase tracking-widest2 text-ink">{p.label}</dt>
+            <dd class="col-start-2 text-sm leading-relaxed text-ink-soft">{p.copy}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</section>

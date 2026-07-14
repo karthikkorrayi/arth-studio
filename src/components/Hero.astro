@@ -1,0 +1,55 @@
+---
+---
+
+<section id="top" class="relative flex h-[100svh] min-h-[640px] w-full items-end overflow-hidden bg-ink">
+  <!-- Video background. Replace src with the studio's own footage (mp4, ~10-20s loop, no audio track ideally).
+       poster is what mobile / slow connections see before (or instead of) the video paints. -->
+  <video
+    class="absolute inset-0 h-full w-full object-cover opacity-70"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1920&auto=format&fit=crop"
+  >
+    <source src="/media/hero-loop.mp4" type="video/mp4" />
+  </video>
+
+  <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-ink/10" aria-hidden="true"></div>
+
+  <!-- Signature: blueprint registration marks + site coordinates, quiet architectural drafting motif -->
+  <div class="pointer-events-none absolute inset-6 hidden border border-plaster/25 sm:block lg:inset-10" aria-hidden="true">
+    <span class="absolute -left-px -top-px h-4 w-4 border-l border-t border-plaster/60"></span>
+    <span class="absolute -right-px -top-px h-4 w-4 border-r border-t border-plaster/60"></span>
+    <span class="absolute -bottom-px -left-px h-4 w-4 border-b border-l border-plaster/60"></span>
+    <span class="absolute -bottom-px -right-px h-4 w-4 border-b border-r border-plaster/60"></span>
+  </div>
+
+  <p class="absolute right-8 top-24 hidden font-mono text-[11px] uppercase tracking-widest2 text-plaster/60 sm:block lg:right-12">
+    Site 12.97°N 77.59°E — Est. 2024
+  </p>
+
+  <div class="relative z-10 mx-auto w-full max-w-7xl px-6 pb-20 pt-40 lg:px-10 lg:pb-28">
+    <p class="mb-6 font-mono text-xs uppercase tracking-widest2 text-plaster/70">
+      Interior Design &amp; Architecture
+    </p>
+    <h1 class="max-w-3xl font-display text-4xl font-light leading-[1.1] text-plaster sm:text-5xl lg:text-6xl">
+      We design rooms around how a life actually unfolds in them.
+    </h1>
+    <p class="mt-6 max-w-xl text-balance font-body text-base leading-relaxed text-plaster/75 sm:text-lg">
+      ARTH STUDIO pairs architectural rigour with material honesty — spaces built to be
+      used daily, not just photographed once.
+    </p>
+
+    <div class="mt-10 flex items-center gap-6">
+      <a
+        href="#gallery"
+        class="group inline-flex items-center gap-3 border border-plaster px-6 py-3.5 font-mono text-xs uppercase tracking-widest2 text-plaster transition-colors duration-300 ease-studio hover:bg-plaster hover:text-ink"
+      >
+        View Portfolio
+        <span class="transition-transform duration-300 ease-studio group-hover:translate-y-0.5" aria-hidden="true">↓</span>
+      </a>
+    </div>
+  </div>
+</section>

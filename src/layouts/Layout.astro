@@ -1,0 +1,28 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'ARTH STUDIO — Interior Design & Architecture',
+  description = 'ARTH STUDIO designs interiors and buildings around how people actually live in them — quiet material choices, precise light, spaces that hold up over decades.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><rect width=%2224%22 height=%2224%22 fill=%22%23201D19%22/><rect x=%228%22 y=%224%22 width=%228%22 height=%2216%22 fill=%22%23EFEAE1%22/></svg>" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body class="bg-plaster text-ink">
+    <slot />
+  </body>
+</html>
